@@ -1,0 +1,2 @@
+class PunchSetting < ApplicationRecord
+end

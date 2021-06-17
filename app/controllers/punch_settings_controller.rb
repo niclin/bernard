@@ -1,0 +1,2 @@
+class PunchSettingsController < ApplicationController
+end
