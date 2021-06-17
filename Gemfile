@@ -22,6 +22,14 @@ gem "devise"
 gem "simple_form"
 gem 'bootstrap', '~> 5.0.1'
 
+# Background jobs
+gem "sidekiq"
+gem "sidekiq-cron"
+gem "sidekiq-status"
+gem "sidekiq-unique-jobs"
+
+gem "rest-client"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

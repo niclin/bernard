@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_085627) do
+ActiveRecord::Schema.define(version: 2021_06_17_093511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "punch_histories", force: :cascade do |t|
+    t.text "response"
+    t.integer "user_id", null: false
+    t.integer "kind", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "punch_settings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "uid", null: false
-    t.string "password", null: false
+    t.string "id_serial", null: false
     t.string "start_work_time", null: false
     t.integer "start_work_padding_percentage", default: 0, null: false
     t.string "end_work_time", null: false
@@ -34,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_085627) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

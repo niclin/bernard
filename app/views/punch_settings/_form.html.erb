@@ -1,0 +1,11 @@
+<%= simple_form_for @punch_setting do |f| %>
+  <%= f.input :uid %>
+  <%= f.input :id_serial %>
+  <%= f.input :start_work_time %>
+  <%= f.input :start_work_padding_percentage %>
+  <%= f.input :end_work_time %>
+  <%= f.input :end_work_padding_percentage %>
+  <%= f.input :status %>
+
+  <%= f.button :submit %>
+<% end %>

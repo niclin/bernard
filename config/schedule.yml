@@ -1,0 +1,4 @@
+auto_punch:
+  cron: "*/1 * * * *"
+  class: "PunchWorker"
+  queue: default
