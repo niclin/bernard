@@ -1,7 +1,4 @@
----
-:concurrency: 4
+:concurrency: 1
 :queues:
-  - critical
-  - mailers
-  - default
-  - low
+  - [mailers, 7]
+  - [default, 5]
