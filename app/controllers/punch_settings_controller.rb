@@ -1,9 +1,6 @@
 class PunchSettingsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-  end
-
   def new
     @punch_setting = current_user.build_punch_setting
   end
@@ -12,7 +9,7 @@ class PunchSettingsController < ApplicationController
     @punch_setting = current_user.build_punch_setting(punch_setting_params)
 
     if @punch_setting.save
-      redirect_to punch_settings_path
+      redirect_to punch_setting_path
     else
       render :new
     end
@@ -26,7 +23,7 @@ class PunchSettingsController < ApplicationController
     @punch_setting = current_user.punch_setting
 
     if @punch_setting.update(punch_setting_params)
-      redirect_to punch_settings_path
+      redirect_to punch_setting_path
     else
       render :edit
     end
@@ -34,6 +31,7 @@ class PunchSettingsController < ApplicationController
 
   def show
     @punch_setting = current_user.punch_setting
+    @punch_histories = current_user.punch_histories
   end
 
   private

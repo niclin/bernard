@@ -1,1 +1,53 @@
-<%= render "form" %>
+<h1>我的打卡設定</h1>
+
+<% if @punch_setting.blank? %>
+  <%= link_to("New", new_punch_setting_path) %>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">UID</th>
+        <th scope="col">ID Serial</th>
+        <th scope="col">開始工作時間</th>
+        <th scope="col">開始工作飄移百分比</th>
+        <th scope="col">結束工作時間</th>
+        <th scope="col">結束飄移百分比</th>
+        <th scope="col">狀態</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><%= @punch_setting.uid %></th>
+        <th scope="row"><%= @punch_setting.id_serial %></th>
+        <th scope="row"><%= @punch_setting.start_work_time %></th>
+        <th scope="row"><%= @punch_setting.start_work_padding_percentage %></th>
+        <th scope="row"><%= @punch_setting.end_work_time %></th>
+        <th scope="row"><%= @punch_setting.end_work_padding_percentage %></th>
+        <th scope="row"><%= @punch_setting.status %></th>
+        <th scope="row"><%= link_to("Edit", edit_punch_setting_path) %></th>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>自動打卡記錄<h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">執行時間</th>
+        <th scope="col">時間線</th>
+        <th scope="col">回應</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @punch_histories.each do |punch_histories| %>
+      <tr>
+        <th scope="row"><%= punch_histories.created_at %></th>
+        <th scope="row"><%= punch_histories.kind %></th>
+        <th scope="row"><%= punch_histories.response %></th>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

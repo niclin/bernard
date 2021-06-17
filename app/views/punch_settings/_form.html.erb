@@ -1,11 +1,11 @@
-<%= simple_form_for @punch_setting do |f| %>
+<%= simple_form_for @punch_setting, url: punch_setting_path do |f| %>
   <%= f.input :uid %>
   <%= f.input :id_serial %>
   <%= f.input :start_work_time %>
   <%= f.input :start_work_padding_percentage %>
   <%= f.input :end_work_time %>
   <%= f.input :end_work_padding_percentage %>
-  <%= f.input :status %>
+  <%= f.input :status, as: :radio_buttons, collection: [['disable', 'disable'], ['enable', 'enable']] %>
 
   <%= f.button :submit %>
 <% end %>
