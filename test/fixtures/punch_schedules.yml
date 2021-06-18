@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  time_line: MyString
+  date: 2021-06-19
+  perform_at: 2021-06-19 01:20:42
+  status: 1
+  response: MyText
+
+two:
+  user_id: 1
+  time_line: MyString
+  date: 2021-06-19
+  perform_at: 2021-06-19 01:20:42
+  status: 1
+  response: MyText

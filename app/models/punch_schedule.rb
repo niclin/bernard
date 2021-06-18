@@ -1,7 +1,7 @@
-class PunchHistory < ApplicationRecord
+class PunchSchedule < ApplicationRecord
   belongs_to :user
 
-  enum kind: {
+  enum time_line: {
     AM: 0,
     PM: 1
   }
