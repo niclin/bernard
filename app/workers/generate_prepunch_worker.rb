@@ -17,7 +17,7 @@ class GeneratePrepunchWorker
         user: punch_setting.user,
         time_line: "AM",
         date: today,
-        schedule_at: morning_schedule_at,
+        schedule_at_unixtime: morning_schedule_at.to_i,
         status: "pending"
       )
 
@@ -29,7 +29,7 @@ class GeneratePrepunchWorker
         user: punch_setting.user,
         time_line: "AM",
         date: today,
-        schedule_at: afternoon_schedule_at,
+        schedule_at_unixtime: afternoon_schedule_at.to_i,
         status: "pending"
       )
     end

@@ -4,8 +4,8 @@ class CreatePunchSchedules < ActiveRecord::Migration[6.1]
       t.integer :user_id, null: false
       t.integer :time_line, null: false
       t.date :date, null: false
-      t.datetime :perform_at
-      t.datetime :schedule_at
+      t.integer :perform_at_unixtime
+      t.integer :schedule_at_unixtime
       t.integer :status, default: 0
       t.text :response
 

@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 2021_06_18_172042) do
     t.integer "user_id", null: false
     t.integer "time_line", null: false
     t.date "date", null: false
-    t.datetime "perform_at"
-    t.datetime "schedule_at"
+    t.integer "perform_at_unixtime"
+    t.integer "schedule_at_unixtime"
     t.integer "status", default: 0
     t.text "response"
     t.datetime "created_at", precision: 6, null: false
