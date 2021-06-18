@@ -25,9 +25,10 @@ ActiveRecord::Schema.define(version: 2021_06_18_172042) do
 
   create_table "punch_schedules", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.string "time_line", limit: 2, null: false
+    t.integer "time_line", null: false
     t.date "date", null: false
     t.datetime "perform_at"
+    t.datetime "schedule_at"
     t.integer "status", default: 0
     t.text "response"
     t.datetime "created_at", precision: 6, null: false
