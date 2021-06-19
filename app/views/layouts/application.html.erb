@@ -52,11 +52,11 @@
     <nav class="pc-sidebar ">
       <div class="navbar-wrapper">
         <div class="m-header">
-          <a href="index.html" class="b-brand">
+          <%= link_to root_path, class: "b-brand" do %>
             <!-- ========   change your logo hear   ============ -->
             <img src="/images/logo.svg" alt="" class="logo logo-lg">
             <img src="/images/logo-sm.svg" alt="" class="logo logo-sm">
-          </a>
+          <% end %>
         </div>
         <div class="navbar-content">
           <ul class="pc-navbar">
