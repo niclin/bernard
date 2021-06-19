@@ -71,7 +71,9 @@ function floatchart() {
                 }
             }
         }
-        new ApexCharts(document.querySelector("#support-chart"), options1).render();
+        if($("#support-chart").length > 0) {
+            new ApexCharts(document.querySelector("#support-chart"), options1).render();
+        }
         var options2 = {
             chart: {
                 type: 'bar',
@@ -113,7 +115,9 @@ function floatchart() {
                 }
             }
         }
-        new ApexCharts(document.querySelector("#support-chart1"), options2).render();
+        if($("#support-chart1").length > 0) {
+            new ApexCharts(document.querySelector("#support-chart1"), options2).render();
+        }
     });
     // [ support-chart ] end
     // [ account-chart ] start
@@ -186,11 +190,13 @@ function floatchart() {
                     }
                 }
             }
-            var chart = new ApexCharts(
-                document.querySelector("#account-chart"),
-                options
-            );
-            chart.render();
+            if($("#account-chart").length > 0) {
+                var chart = new ApexCharts(
+                    document.querySelector("#account-chart"),
+                    options
+                );
+                chart.render();
+            }
         });
     });
     // [ account-chart ] end
