@@ -35,17 +35,25 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">執行時間</th>
         <th scope="col">時間線</th>
-        <th scope="col">回應</th>
+        <th scope="col">日期</th>
+        <th scope="col">預計執行時間</th>
+        <th scope="col">實際執行時間</th>
+        <th scope="col">狀態</th>
+        <th scope="col">伺服器回應</th>
+        <th scope="col">排程建立時間</th>
       </tr>
     </thead>
     <tbody>
-    <% @punch_histories.each do |punch_histories| %>
+    <% @punch_schedules.each do |punch_schedule| %>
       <tr>
-        <th scope="row"><%= punch_histories.created_at %></th>
-        <th scope="row"><%= punch_histories.kind %></th>
-        <th scope="row"><%= punch_histories.response %></th>
+        <th scope="row"><%= punch_schedule.time_line %></th>
+        <th scope="row"><%= punch_schedule.date %></th>
+        <th scope="row"><%= Time.at(punch_schedule.schedule_at_unixtime) %></th>
+        <th scope="row"><%= punch_schedule.perform_at_unixtime %></th>
+        <th scope="row"><%= punch_schedule.status %></th>
+        <th scope="row"><%= punch_schedule.response %></th>
+        <th scope="row"><%= punch_schedule.created_at %></th>
       </tr>
     <% end %>
     </tbody>
