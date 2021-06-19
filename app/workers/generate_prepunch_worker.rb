@@ -6,8 +6,10 @@ class GeneratePrepunchWorker
 
   def perform
     PunchSetting.enable.find_each do |punch_setting|
-
       today = Date.today
+
+      next if Holiday.at?(today)
+
       user = punch_setting.user
 
       # AM

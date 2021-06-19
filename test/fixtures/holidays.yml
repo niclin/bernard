@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2021-06-19
+  description: MyText
+  is_holiday: false
+
+two:
+  date: 2021-06-19
+  description: MyText
+  is_holiday: false
+
+# == Schema Information
+#
+# Table name: holidays
+#
+#  id          :bigint           not null, primary key
+#  date        :date
+#  description :text
+#  is_holiday  :boolean
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
