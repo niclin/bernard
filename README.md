@@ -1,24 +1,56 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Initial
 
-Things you may want to cover:
+```
+rake db:create db:migrate
+yarn install
 
-* Ruby version
+```
 
-* System dependencies
+## Start Server
 
-* Configuration
+```
+rails server
+```
 
-* Database creation
+## Start Webpack Compile Server
 
-* Database initialization
+```
+./bin/webpack-dev-server
 
-* How to run the test suite
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Some Know How
 
-* Deployment instructions
+*Main or Common used js logic import in*
 
-* ...
+Used: `<%= javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload' %>`
+
+FilePath:`app/javascript/packs/application.js`
+
+*SpecialPage used js logic import like this*
+
+Used: `<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>`
+
+FilePath:`app/javascript/packs/dashboard.js`
+
+
+*Theme style put in*
+
+File: `.css`
+
+FilePath: `bernard/app/assets/stylesheets/theme_libs/*`
+
+*Theme relative min js put in*
+
+File: `min.js`
+
+FilePath: `bernard/public/javascripts/*`
+
+
+## Node Module Version
+
+"bootstrap": "^5.0.1",
+"@popperjs/core": "2.9.2"
+"webpack-dev-server": "^3.11.2"

@@ -20,7 +20,6 @@ gem 'jbuilder', '~> 2.7'
 
 gem "devise"
 gem "simple_form"
-gem 'bootstrap', '~> 5.0.1'
 
 # Background jobs
 gem "sidekiq"
