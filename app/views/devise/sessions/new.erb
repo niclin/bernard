@@ -1,29 +1,31 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
+<div class="template">
+  <div class="signin_wrapper animated fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
 
-    <!-- Icon -->
-    <!-- <div class="fadeIn first"> -->
-      <%# if user_signed_in? %>
-        <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Daka Icon" /> -->
-      <%# else %>
-        <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
-      <%# end %>
-    <!-- </div> -->
+      <!-- Icon -->
+      <!-- <div class="fadeIn first"> -->
+        <%# if user_signed_in? %>
+          <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Daka Icon" /> -->
+        <%# else %>
+          <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+        <%# end %>
+      <!-- </div> -->
 
-    <!-- Login Form -->
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name) , html: {class: 'sign_in_form mt-4' , role: "form"}) do |f| %>
-      <%= f.email_field :email, class: 'session_input fadeIn second' , placeholder: "Email" %>
-      <%= f.password_field :password, class: 'session_input fadeIn third' , placeholder: "Password" %>
-      <input type="submit" class="session_input fadeIn fourth" value="Log In">
-    <% end %>
-
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <div><%= link_to "Forgot Password?", new_password_path(resource_name), class: "p-2 underlineHover" %></div>
-      
-      <div><%= link_to "Sign Up", new_registration_path(resource_name), class: "underlineHover" %></div>
+      <!-- Login Form -->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name) , html: {class: 'sign_in_form mt-4' , role: "form"}) do |f| %>
+        <%= f.email_field :email, class: 'session_input fadeIn second' , placeholder: "Email" %>
+        <%= f.password_field :password, class: 'session_input fadeIn third' , placeholder: "Password" %>
+        <div class="col-xs-12" style="text-align:center;">
+          <%= f.check_box :remember_me, as: :boolean %>
+          <label for="user_remember_me">Remember me</label>
+        </div>
+        <input type="submit" class="session_input fadeIn fourth" value="Log In">
+      <% end %>
+      <div id="formFooter">
+        <div><%= link_to "Forgot Password?", new_password_path(resource_name), class: "p-2 underlineHover" %></div>
+        <div><%= link_to "Sign Up", new_registration_path(resource_name), class: "underlineHover" %></div>
+      </div>
     </div>
-
   </div>
 </div>

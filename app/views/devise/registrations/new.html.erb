@@ -1,30 +1,30 @@
-<div class="wrapper fadeInDown">
-  <div id="formContent">
-    <!-- Tabs Titles -->
+<div class="template">
+  <div class="signup_wrapper animated fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
 
-    <!-- Icon -->
-    <!-- <div class="fadeIn first"> -->
-      <%# if user_signed_in? %>
-        <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Daka Icon" /> -->
-      <%# else %>
-        <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
-      <%# end %>
-    <!-- </div> -->
+      <!-- Icon -->
+      <!-- <div class="fadeIn first"> -->
+        <%# if user_signed_in? %>
+          <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="Daka Icon" /> -->
+        <%# else %>
+          <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+        <%# end %>
+      <!-- </div> -->
 
-    <!-- Login Form -->
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , html: {class: 'sign_in_form mt-4' , role: "form"}) do |f| %>
-      <%= f.email_field :email, required: true, autofocus: true, :placeholder => "Email", class: 'session_input fadeIn second' %>
-      <%= f.password_field :password, class: "session_input fadeIn third" ,required: true, label:false, :placeholder => "Password" %>
-      <%= f.password_field :password, class: "session_input fadeIn third" ,required: true, label:false, :placeholder => "Password Confirmed" %>
-      <input type="submit" class="session_input fadeIn fourth" value="Sign Up">
-    <% end %>
+      <!-- Login Form -->
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , html: {class: 'sign_in_form mt-4' , role: "form"}) do |f| %>
+        <%= f.email_field :email, required: true, autofocus: true, :placeholder => "Email", class: 'session_input fadeIn second' %>
+        <%= f.password_field :password, class: "session_input fadeIn third" ,required: true, label:false, :placeholder => "Password" %>
+        <%= f.password_field :password, class: "session_input fadeIn third" ,required: true, label:false, :placeholder => "Password Confirmed" %>
+        <input type="submit" class="session_input fadeIn fourth" value="Sign Up">
+      <% end %>
 
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <div><%= link_to "Forgot Password?", new_password_path(resource_name), class: "p-2 underlineHover" %></div>
-      
-      <div><%= link_to "Sign In", new_session_path(resource_name), class: "underlineHover" %></div>
+      <div id="formFooter">
+        <div><%= link_to "Forgot Password?", new_password_path(resource_name), class: "p-2 underlineHover" %></div>
+        <div><%= link_to "Sign In", new_session_path(resource_name), class: "underlineHover" %></div>
+      </div>
+
     </div>
-
   </div>
 </div>

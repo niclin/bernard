@@ -12,3 +12,10 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+$(document).on('turbolinks:load', function() {
+  // after turbolinks:load
+  // becuase turbolinks will let link_to not trigger reload js
+  // custome js in here ...
+});
