@@ -2,3 +2,8 @@ auto_punch:
   cron: "*/1 * * * *"
   class: "PunchWorker"
   queue: default
+
+generate_punch_schedule:
+  cron: "5 0 * * *"
+  class: "GeneratePrepunchWorker"
+  queue: default

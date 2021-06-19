@@ -11,18 +11,18 @@ class PunchWorker
 
   def perform
     PunchSchedule.pending.where(schedule_at_unixtime: 1.minute.ago.to_i..1.minute.from_now.to_i, time_line: time_line).find_each do |punch_schedule|
-      if in_safe_time_range?(punch_schedule) && !punch_setting.user.alreday_punch_today?(time_line: time_line)
-        punch!(punch_schedule.user)
+      if in_safe_time_range?(punch_schedule) && !punch_schedule.user.alreday_punch_today?(time_line: time_line)
+        punch!(punch_schedule)
       else
-        puts "ID: #{punch_setting.id} 目前不需要打卡, 時間區域: #{in_safe_time_range?(punch_setting)}, 該時段 #{time_line} 打卡狀態: #{punch_setting.user.alreday_punch_today?(time_line: time_line)}"
+        puts "ID: #{punch_schedule.id} 目前不需要打卡, 時間區域: #{in_safe_time_range?(punch_schedule)}, 該時段 #{time_line} 打卡狀態: #{punch_schedule.user.alreday_punch_today?(time_line: time_line)}"
       end
     end
   end
 
   private
 
-  def punch!(user)
-    punch_setting = user.punch_setting
+  def punch!(punch_schedule)
+    punch_setting = punch_schedule.user.punch_setting
 
     login = RestClient.post(
       HR_SYSTEM_URL,
@@ -55,9 +55,16 @@ class PunchWorker
     punch_result = JSON.parse(return_value)
 
     if punch_result["status"] == "success"
-      punch_setting.user.punch_histories.create!(
-        kind: time_line,
+      punch_schedule.update(
+        status: "successed",
+        perform_at_unixtime: Time.zone.now.to_i,
         response: punch_result["message"]
+      )
+    else
+      punch_schedule.update(
+        status: "failed",
+        perform_at_unixtime: Time.zone.now.to_i,
+        response: punch_response
       )
     end
   end
@@ -75,7 +82,7 @@ class PunchWorker
   end
 
   def in_safe_time_range?(punch_schedule)
-    target_time_range = (punch_schedule.schedule_at_unixtime + 1.minute.to_i)..(punch_schedule.schedule_at_unixtime - 1.minute.to_i)
+    target_time_range = (punch_schedule.schedule_at_unixtime - 1.minute).to_i..(punch_schedule.schedule_at_unixtime + 1.minute).to_i
 
     perform_at.to_i.in?(target_time_range)
   end

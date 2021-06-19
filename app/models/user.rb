@@ -5,9 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :punch_setting
-  has_many :punch_histories
+  has_many :punch_schedules
 
   def alreday_punch_today?(time_line: "AM")
-    punch_histories.public_send(time_line).where(created_at: Time.zone.today.beginning_of_day..Time.zone.today.end_of_day).exists?
+    punch_schedules.where(
+      date: Date.today,
+      time_line: time_line,
+    ).where.not(perform_at_unixtime: nil).exists?
   end
 end
