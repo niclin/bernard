@@ -9,9 +9,9 @@
         <th scope="col">UID</th>
         <th scope="col">ID Serial</th>
         <th scope="col">開始工作時間</th>
-        <th scope="col">開始工作飄移百分比</th>
+        <th scope="col">開始工作飄移分鐘數</th>
         <th scope="col">結束工作時間</th>
-        <th scope="col">結束飄移百分比</th>
+        <th scope="col">結束飄移分鐘數</th>
         <th scope="col">狀態</th>
         <th scope="col">#</th>
       </tr>
@@ -19,12 +19,12 @@
     <tbody>
       <tr>
         <th scope="row"><%= @punch_setting.uid %></th>
-        <th scope="row"><%= @punch_setting.id_serial %></th>
+        <th scope="row"><%= @punch_setting.mask_id_serial %></th>
         <th scope="row"><%= @punch_setting.start_work_time %></th>
         <th scope="row"><%= @punch_setting.start_work_padding_percentage %></th>
         <th scope="row"><%= @punch_setting.end_work_time %></th>
         <th scope="row"><%= @punch_setting.end_work_padding_percentage %></th>
-        <th scope="row"><%= @punch_setting.status %></th>
+        <th scope="row"><%= t("enum.punch_setting.status.#{@punch_setting.status}") %></th>
         <th scope="row"><%= link_to("Edit", edit_punch_setting_path) %></th>
       </tr>
     </tbody>
@@ -48,10 +48,10 @@
     <% @punch_schedules.each do |punch_schedule| %>
       <tr>
         <th scope="row"><%= punch_schedule.time_line %></th>
-        <th scope="row"><%= punch_schedule.date %></th>
-        <th scope="row"><%= Time.at(punch_schedule.schedule_at_unixtime) %></th>
-        <th scope="row"><%= punch_schedule.perform_at_unixtime %></th>
-        <th scope="row"><%= punch_schedule.status %></th>
+        <th scope="row"><%= punch_schedule.date.to_s(:ymd) %></th>
+        <th scope="row"><%= Time.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
+        <th scope="row"><%= render_perform_at_time_string(punch_schedule.perform_at_unixtime) %></th>
+        <th scope="row"><%= t("enum.punch_schedule.status.#{punch_schedule.status}") %></th>
         <th scope="row"><%= punch_schedule.response %></th>
         <th scope="row"><%= punch_schedule.created_at %></th>
       </tr>

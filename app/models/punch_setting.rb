@@ -5,6 +5,10 @@ class PunchSetting < ApplicationRecord
     disable: 0,
     enable: 1
   }
+
+  def mask_id_serial
+    id_serial.dup.tap { |m| m[2..4] = "***" }
+  end
 end
 
 # == Schema Information

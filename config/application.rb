@@ -21,5 +21,6 @@ module Bernard
     # default i18n local and time_zone
     config.active_record.default_timezone = :local
     config.time_zone = "Taipei"
+    config.i18n.default_locale = :"zh-TW"
   end
 end
