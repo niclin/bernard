@@ -6,35 +6,35 @@ class GeneratePrepunchWorker
 
   def perform
     PunchSetting.enable.find_each do |punch_setting|
-      tomorrow = Time.zone.tomorrow
+      today = Time.zone.today
 
-      next if Holiday.at?(tomorrow)
+      next if Holiday.at?(today)
 
       user = punch_setting.user
 
       # AM
-      if !user.punch_schedules.where(date: tomorrow, time_line: "AM").exists?
+      if !user.punch_schedules.where(date: today, time_line: "AM").exists?
         start_work_time_padding_munutes = random_minutes_with_number(punch_setting.start_work_padding_percentage)
         morning_schedule_at = Time.zone.strptime(punch_setting.start_work_time, '%H%M') + start_work_time_padding_munutes
 
         PunchSchedule.create!(
           user: user,
           time_line: "AM",
-          date: tomorrow,
+          date: today,
           schedule_at_unixtime: morning_schedule_at.to_i,
           status: "pending"
         )
       end
 
       # PM
-      if !user.punch_schedules.where(date: tomorrow, time_line: "PM").exists?
+      if !user.punch_schedules.where(date: today, time_line: "PM").exists?
         end_work_time_padding_munutes = random_minutes_with_number(punch_setting.end_work_padding_percentage)
         afternoon_schedule_at = Time.zone.strptime(punch_setting.end_work_time, '%H%M') + end_work_time_padding_munutes
 
         PunchSchedule.create!(
           user: punch_setting.user,
           time_line: "PM",
-          date: tomorrow,
+          date: today,
           schedule_at_unixtime: afternoon_schedule_at.to_i,
           status: "pending"
         )
