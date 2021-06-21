@@ -15,7 +15,7 @@ class GeneratePrepunchWorker
       # AM
       if !user.punch_schedules.where(date: today, time_line: "AM").exists?
         start_work_time_padding_munutes = random_minutes_with_number(punch_setting.start_work_padding_percentage)
-        morning_schedule_at = Time.strptime(punch_setting.start_work_time, '%H%M') + start_work_time_padding_munutes
+        morning_schedule_at = Time.zone.strptime(punch_setting.start_work_time, '%H%M') + start_work_time_padding_munutes
 
         PunchSchedule.create!(
           user: user,
@@ -29,7 +29,7 @@ class GeneratePrepunchWorker
       # PM
       if !user.punch_schedules.where(date: today, time_line: "PM").exists?
         end_work_time_padding_munutes = random_minutes_with_number(punch_setting.end_work_padding_percentage)
-        afternoon_schedule_at = Time.strptime(punch_setting.end_work_time, '%H%M') + end_work_time_padding_munutes
+        afternoon_schedule_at = Time.zone.strptime(punch_setting.end_work_time, '%H%M') + end_work_time_padding_munutes
 
         PunchSchedule.create!(
           user: punch_setting.user,

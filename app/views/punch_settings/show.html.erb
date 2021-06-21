@@ -49,7 +49,7 @@
       <tr>
         <th scope="row"><%= punch_schedule.time_line %></th>
         <th scope="row"><%= punch_schedule.date.to_s(:ymd) %></th>
-        <th scope="row"><%= Time.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
+        <th scope="row"><%= Time.zone.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
         <th scope="row"><%= render_perform_at_time_string(punch_schedule.perform_at_unixtime) %></th>
         <th scope="row"><%= t("enum.punch_schedule.status.#{punch_schedule.status}") %></th>
         <th scope="row"><%= punch_schedule.response %></th>
