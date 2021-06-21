@@ -82,7 +82,7 @@ class PunchWorker
   end
 
   def in_safe_time_range?(punch_schedule)
-    target_time_range = (punch_schedule.schedule_at_unixtime - 1.minute).to_i..(punch_schedule.schedule_at_unixtime + 1.minute).to_i
+    target_time_range = (punch_schedule.schedule_at_unixtime - 1.minute.to_i)..(punch_schedule.schedule_at_unixtime + 1.minute.to_i)
 
     perform_at.to_i.in?(target_time_range)
   end
