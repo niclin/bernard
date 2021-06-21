@@ -31,7 +31,7 @@ class PunchSettingsController < ApplicationController
 
   def show
     @punch_setting = current_user.punch_setting
-    @punch_schedules = current_user.punch_schedules
+    @punch_schedules = current_user.punch_schedules.order(id: :desc)
   end
 
   private
