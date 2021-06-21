@@ -55,13 +55,13 @@ class PunchWorker
     punch_result = JSON.parse(return_value)
 
     if punch_result["status"] == "success"
-      punch_schedule.update(
+      punch_schedule.update!(
         status: "successed",
         perform_at_unixtime: Time.zone.now.to_i,
         response: punch_result["message"]
       )
     else
-      punch_schedule.update(
+      punch_schedule.update!(
         status: "failed",
         perform_at_unixtime: Time.zone.now.to_i,
         response: punch_response
