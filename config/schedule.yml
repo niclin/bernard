@@ -4,6 +4,6 @@ auto_punch:
   queue: default
 
 generate_punch_schedule:
-  cron: "5 0 * * *"
+  cron: "30 19 * * *"
   class: "GeneratePrepunchWorker"
   queue: default
