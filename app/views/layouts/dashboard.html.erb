@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bernard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Favicon icon -->
+    <link rel="icon" href="/images/favicon.svg" type="image/x-icon">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_include_tag  '/javascripts/vendor-all.min.js' %>
+    <%= javascript_include_tag  '/javascripts/apexcharts.min.js' %>
+    <%= javascript_include_tag  '/javascripts/feather.min.js' %>
+    <%= javascript_include_tag  '/javascripts/pcoded.min.js' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
+    <%#= Because bootstrap initial import by webpack %>
+    <%#= custome stylesheet need to load after js included to cover %>
+    <%#= or until application.scss which we can be deprecated to move into webpack %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+      <div class="loader-track">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+    <!-- [ Pre-loader ] End -->
+    <!-- [ Mobile header ] start -->
+    <div class="pc-mob-header pc-header">
+      <div class="pcm-logo">
+        <img src="/images/logo.svg" alt="" class="logo logo-lg">
+      </div>
+      <div class="pcm-toolbar">
+        <a href="#!" class="pc-head-link" id="mobile-collapse">
+          <div class="hamburger hamburger--arrowturn">
+            <div class="hamburger-box">
+              <div class="hamburger-inner"></div>
+            </div>
+          </div>
+        </a>
+        <a href="#!" class="pc-head-link" id="headerdrp-collapse">
+          <i data-feather="align-right"></i>
+        </a>
+        <a href="#!" class="pc-head-link" id="header-collapse">
+          <i data-feather="more-vertical"></i>
+        </a>
+      </div>
+    </div>
+    <!-- [ Mobile header ] End -->
+    <!-- [ navigation menu ] start -->
+    <nav class="pc-sidebar ">
+      <div class="navbar-wrapper">
+        <div class="m-header">
+          <%= link_to root_path, class: "b-brand" do %>
+            <!-- ========   change your logo hear   ============ -->
+            <img src="/images/logo.svg" alt="" class="logo logo-lg">
+            <img src="/images/logo-sm.svg" alt="" class="logo logo-sm">
+          <% end %>
+        </div>
+        <div class="navbar-content">
+          <ul class="pc-navbar">
+            <li class="pc-item pc-caption">
+              <label>Navigation</label>
+            </li>
+            <li class="pc-item">
+              <%= link_to root_path, class: "pc-link" do %>
+                <span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Dashboard</span>
+              <% end %>
+            </li>
+            <li class="pc-item">
+              <%= link_to punch_setting_path, class: "pc-link" do %>
+                <span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Daka</span>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- [ navigation menu ] end -->
+    <!-- [ Header ] start -->
+    <header class="pc-header ">
+      <div class="header-wrapper">
+        <div class="ml-auto">
+          <ul class="list-unstyled">
+            <li class="dropdown pc-h-item">
+              <% if user_signed_in? %>
+                <a class="pc-head-link dropdown-toggle arrow-none mr-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                  <img src="/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+                  <span>
+                    <span class="user-name">Joseph William</span>
+                    <span class="user-desc">Administrator</span>
+                  </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right pc-h-dropdown" aria-labelledby="dropdownMenuLink">
+                  <%= link_to(destroy_user_session_path, method: :delete, class: "dropdown-item") do %>
+                    <i class="material-icons-two-tone">chrome_reader_mode</i>
+                    <span>Logout</span>
+                  <% end %>
+                </div>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <!-- [ Header ] end -->
+    <div class="pc-container">
+      <div class="pcoded-content">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
