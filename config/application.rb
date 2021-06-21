@@ -22,5 +22,6 @@ module Bernard
     config.active_record.default_timezone = :local
     config.time_zone = "Taipei"
     config.i18n.default_locale = :"zh-TW"
+    config.generators.test_framework = nil
   end
 end
