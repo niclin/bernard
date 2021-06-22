@@ -10,7 +10,7 @@ class PunchWorker
   FORM_FILE = "hrm8airw.pkg;hrm_1749486007995236467020778061283968299909.cfg,hrm8w.pkg,briefcase.pkg,hrm8aw.pkg,hrm8bw.pkg,hrm8fw.pkg".freeze
 
   def perform
-    PunchSchedule.pending.where(schedule_at_unixtime: (Time.zone.now - 2.minutes).to_i..(Time.zone.now + 2.minutes).to_i, time_line: time_line).find_each do |punch_schedule|
+    PunchSchedule.pending.where(schedule_at_unixtime: (Time.zone.now - 1.minutes).to_i..(Time.zone.now + 1.minutes).to_i, time_line: time_line).find_each do |punch_schedule|
       if in_safe_time_range?(punch_schedule) && !punch_schedule.user.alreday_punch_today?(time_line: time_line)
         punch!(punch_schedule)
       else
