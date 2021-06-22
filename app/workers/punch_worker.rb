@@ -1,7 +1,7 @@
 require 'rest-client'
 
 class PunchWorker
-  include Sidekiq::Worker
+  include Notifier::SlackNotifiable
 
   sidekiq_options retry: false
   sidekiq_options unique: :until_and_while_executing
@@ -60,13 +60,16 @@ class PunchWorker
         perform_at_unixtime: Time.zone.now.to_i,
         response: punch_result["message"]
       )
+      attachments = build_attachment(punch_schedule)
     else
       punch_schedule.update!(
         status: "failed",
         perform_at_unixtime: Time.zone.now.to_i,
         response: punch_response
       )
+      attachments = build_attachment(punch_schedule)
     end
+    send_to_slack("Bernard Bot", "執行完畢", attachments)
   end
 
   def perform_at
@@ -85,5 +88,19 @@ class PunchWorker
     target_time_range = (punch_schedule.schedule_at_unixtime - 1.minute.to_i)..(punch_schedule.schedule_at_unixtime + 1.minute.to_i)
 
     perform_at.to_i.in?(target_time_range)
+  end
+
+  def build_attachment(source)
+    @check_point_message = now_is_morning? ? "打卡上班" : "打卡下班"
+    message = source.successed? ? "#{source.user.email} 已#{check_point_message}" : "#{source.user.email} #{check_point_message}失敗"
+    error_message = source.successed? ? "" : "\n*Response：*#{source.response}"
+    priority = source.successed? ? "success" : "alert"
+    [{
+       "type": "mrkdwn",
+       "color": SLACK_COLOR.public_send(priority),
+       "text": "*訊息：* `#{message}`#{error_message}",
+       "footer": "WestWorld(1973)",
+       "ts": source.perform_at_unixtime.to_i
+    }]
   end
 end
