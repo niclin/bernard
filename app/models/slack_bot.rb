@@ -7,14 +7,11 @@ class SlackBot
   class ResponseError < StandardError; end
 
   def initialize(channel:, username: "slack_bot")
-    @channel = channel
+    @channel = Rails.env.production? ? channel : BOMB_ZONE
     @username = username
   end
 
   def say(text, attachments = nil)
-
-    @channel = BOMB_ZONE if !Rails.env.production?
-
     response = RestClient.post "https://slack.com/api/chat.postMessage", {
       "token": Rails.application.credentials.slack[:token],
       "channel": @channel,
