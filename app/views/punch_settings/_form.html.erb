@@ -1,15 +1,32 @@
 <%= simple_form_for @punch_setting, url: punch_setting_path do |f| %>
-  <%= f.input :uid, label: "棉花糖 HR 登入系統帳號" %>
-  <%= f.input :id_serial, label: "棉花糖 HR 登入系統密碼" %>
-
-  <p>打卡時間為 24H制，請輸入全數字，如果希望早上 9 點 30分打卡，請輸入 0930</p>
-  <%= f.input :start_work_time, label: "上班打卡時間" %>
-  <%= f.input :end_work_time, label: "下班打卡時間" %>
-
-  <p>飄移分鐘數接受正負值，如果打卡時間為 0930，輸入 20，則會在 0930~0950 之間隨機打卡，輸入負值則是提前</p>
-  <%= f.input :start_work_padding_percentage, label: "上班打卡時間飄移分鐘數" %>
-  <%= f.input :end_work_padding_percentage, label: "下班打卡時間飄移分鐘數" %>
-  <%= f.input :status, label: "狀態", as: :radio_buttons, collection: [[t("enum.punch_setting.status.disable"), 'disable'], [t("enum.punch_setting.status.enable"), 'enable']] %>
-
-  <%= f.button :submit, "提交", class: "btn btn-success" %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :uid, label: "棉花糖 HR 登入系統帳號" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :id_serial, label: "棉花糖 HR 登入系統密碼" %>
+    </div>
+    <div class="col-xl-6">
+      <h5 class="">打卡時間</h5>
+      <p>如果希望早上 9 點 30分打卡，請輸入 0930</p>
+      <p>為 24H 制，請輸入全數字</p>
+      <hr>
+      <%= f.input :start_work_time, label: "上班打卡時間" %>
+      <%= f.input :end_work_time, label: "下班打卡時間" %>
+    </div>
+    <div class="col-xl-6">
+      <h5 class="">飄移分鐘數</h5>
+      <p>打卡時間為 0930，輸入 20，則會在 0930~0950 之間隨機打卡</p>
+      <p>接受正負值，負值則是提前</p>
+      <hr>
+    <%= f.input :start_work_padding_percentage, label: "上班打卡時間飄移分鐘數" %>
+    <%= f.input :end_work_padding_percentage, label: "下班打卡時間飄移分鐘數" %>
+    </div>
+    <div class="col-md-12">
+      <div class="form-check form-switch pl-2">
+        <%= f.input :status, as: :boolean, checked_value: 'enable',unchecked_value: 'disable', label: "狀態" %>
+      </div>
+    </div>
+    <%= f.button :submit, "提交", class: "btn btn-success" %>
+  </div>
 <% end %>

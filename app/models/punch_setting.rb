@@ -1,6 +1,8 @@
 class PunchSetting < ApplicationRecord
   belongs_to :user
 
+  validate :work_time_range
+
   enum status: {
     disable: 0,
     enable: 1
@@ -8,6 +10,15 @@ class PunchSetting < ApplicationRecord
 
   def mask_id_serial
     id_serial.dup.tap { |m| m[2..4] = "***" }
+  end
+
+  private
+
+  def work_time_range
+    work_time_range = Time.zone.strptime(end_work_time, '%H%M').to_i - Time.zone.strptime(start_work_time, '%H%M').to_i
+    if work_time_range < 8.5.hours.to_i
+      errors.add(:end_work_time, "時間區間要大於 8.5 小時，實際工時 7.5小時")
+    end
   end
 end
 
