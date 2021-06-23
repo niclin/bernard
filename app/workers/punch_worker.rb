@@ -91,7 +91,7 @@ class PunchWorker
   end
 
   def build_attachment(source)
-    @check_point_message = now_is_morning? ? "打卡上班" : "打卡下班"
+    check_point_message = now_is_morning? ? "打卡上班" : "打卡下班"
     message = source.successed? ? "#{source.user.email} 已#{check_point_message}" : "#{source.user.email} #{check_point_message}失敗"
     error_message = source.successed? ? "" : "\n*Response：*#{source.response}"
     priority = source.successed? ? "success" : "alert"
