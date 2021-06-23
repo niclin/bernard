@@ -1,5 +1,6 @@
 
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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".freeze
+SLACKBOMBZONE_WEBHOOK_URL = "https://hooks.slack.com/services/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".freeze
+WEST_WORLD = "#west_world"
 
 SLACK_COLOR = OpenStruct.new(
   success: "#2eb886",         # green

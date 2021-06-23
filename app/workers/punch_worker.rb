@@ -69,7 +69,7 @@ class PunchWorker
       )
       attachments = build_attachment(punch_schedule)
     end
-    send_to_slack("Bernard Bot", "執行完畢", attachments)
+    send_to_slack(WEST_WORLD, "Bernard Bot", nil, attachments)
   end
 
   def perform_at
