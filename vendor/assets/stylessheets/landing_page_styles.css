@@ -2947,17 +2947,6 @@ textarea.form-control-lg {
   opacity: 0.65;
 }
 
-.btn-primary-doris {
-  color: #fff;
-  background-color: #533dd0;
-  border-color: #533dd0;
-}
-.btn-primary-doris:hover {
-  color: #fff;
-  background-color: #6158cb;
-  border-color: #6158cb;
-}
-
 .btn-primary {
   color: #fff;
   background-color: #533dd0;
