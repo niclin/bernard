@@ -1,62 +1,77 @@
-<h1>我的打卡設定</h1>
-
-<% if @punch_setting.blank? %>
-  <%= link_to("New", new_punch_setting_path) %>
-<% else %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">UID</th>
-        <th scope="col">ID Serial</th>
-        <th scope="col">開始工作時間</th>
-        <th scope="col">開始工作飄移分鐘數</th>
-        <th scope="col">結束工作時間</th>
-        <th scope="col">結束飄移分鐘數</th>
-        <th scope="col">狀態</th>
-        <th scope="col">#</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row"><%= @punch_setting.uid %></th>
-        <th scope="row"><%= @punch_setting.mask_id_serial %></th>
-        <th scope="row"><%= @punch_setting.start_work_time %></th>
-        <th scope="row"><%= @punch_setting.start_work_padding_percentage %></th>
-        <th scope="row"><%= @punch_setting.end_work_time %></th>
-        <th scope="row"><%= @punch_setting.end_work_padding_percentage %></th>
-        <th scope="row"><%= t("enum.punch_setting.status.#{@punch_setting.status}") %></th>
-        <th scope="row"><%= link_to("Edit", edit_punch_setting_path) %></th>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>自動打卡記錄<h2>
-  <small>系統將於每天 00:30 建立打卡預約單</small>
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">時間線</th>
-        <th scope="col">日期</th>
-        <th scope="col">預計執行時間</th>
-        <th scope="col">實際執行時間</th>
-        <th scope="col">狀態</th>
-        <th scope="col">伺服器回應</th>
-        <th scope="col">排程建立時間</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @punch_schedules.each do |punch_schedule| %>
-      <tr>
-        <th scope="row"><%= punch_schedule.time_line %></th>
-        <th scope="row"><%= punch_schedule.date.to_s(:ymd) %></th>
-        <th scope="row"><%= Time.zone.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
-        <th scope="row"><%= render_perform_at_time_string(punch_schedule.perform_at_unixtime) %></th>
-        <th scope="row"><%= t("enum.punch_schedule.status.#{punch_schedule.status}") %></th>
-        <th scope="row"><%= punch_schedule.response %></th>
-        <th scope="row"><%= punch_schedule.created_at %></th>
-      </tr>
+<div class="card">
+  <div class="card-header">
+    <h2>我的打卡設定</h2>
+  </div>
+  <div class="card-body">
+    <% if @punch_setting.blank? %>
+      <%= link_to("New", new_punch_setting_path) %>
+    <% else %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">UID</th>
+            <th scope="col">ID Serial</th>
+            <th scope="col">開始工作時間</th>
+            <th scope="col">開始工作飄移分鐘數</th>
+            <th scope="col">結束工作時間</th>
+            <th scope="col">結束飄移分鐘數</th>
+            <th scope="col">狀態</th>
+            <th scope="col">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><%= @punch_setting.uid %></th>
+            <th scope="row"><%= @punch_setting.mask_id_serial %></th>
+            <th scope="row"><%= @punch_setting.start_work_time %></th>
+            <th scope="row"><%= @punch_setting.start_work_padding_percentage %></th>
+            <th scope="row"><%= @punch_setting.end_work_time %></th>
+            <th scope="row"><%= @punch_setting.end_work_padding_percentage %></th>
+            <th scope="row"><%= t("enum.punch_setting.status.#{@punch_setting.status}") %></th>
+            <th scope="row"><%= link_to("Edit", edit_punch_setting_path, class: "btn btn-sm btn-primary") %></th>
+          </tr>
+        </tbody>
+      </table>
     <% end %>
-    </tbody>
-  </table>
-<% end %>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <h2>自動打卡記錄<h2>
+  </div>
+  <div class="card-body">
+    <strong><small>系統將於每天 00:30 建立打卡預約單</small></strong>
+    <% if @punch_schedules.present? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">時間線</th>
+            <th scope="col">日期</th>
+            <th scope="col">預計執行時間</th>
+            <th scope="col">實際執行時間</th>
+            <th scope="col">狀態</th>
+            <th scope="col">排程建立時間</th>
+            <th scope="col">伺服器回應</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @punch_schedules.each do |punch_schedule| %>
+            <tr>
+              <th scope="row"><%= render_timeline_badge(punch_schedule.time_line) %></th>
+              <th scope="row"><%= punch_schedule.date.to_s(:ymd) %></th>
+              <th scope="row"><%= Time.zone.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
+              <th scope="row"><%= render_perform_at_time_string(punch_schedule.perform_at_unixtime) %></th>
+              <th scope="row"><%= render_status(punch_schedule) %></th>
+              <th scope="row"><%= punch_schedule.created_at %></th>
+              <th scope="row">
+                <% if !punch_schedule.pending? %>
+                  <button class="btn btn-sm btn-primary showPopup" data-icon="<%= punch_schedule.status %>" data-response="<%= punch_schedule.response %>">show</button>
+                <% end %>
+              </th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

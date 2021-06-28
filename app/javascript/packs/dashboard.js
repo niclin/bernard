@@ -6,8 +6,6 @@
 // import Turbolinks from "turbolinks"
 import PerfectScrollbar from 'perfect-scrollbar';
 
-// Turbolinks.start()
-
 'use strict';
 $(document).on('turbolinks:load', function() {
   setTimeout(function() {

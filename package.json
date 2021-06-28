@@ -13,6 +13,7 @@
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
     "perfect-scrollbar": "^1.5.1",
+    "sweetalert2": "^11.0.18",
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
