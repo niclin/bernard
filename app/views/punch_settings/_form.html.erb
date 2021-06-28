@@ -13,26 +13,30 @@
       <hr>
       <%= f.input :start_work_time, label: "上班打卡時間" %>
       <%= f.input :end_work_time, label: "下班打卡時間" %>
-      <%= f.input :geo_latitude, label: "經度 (Latitude)" %>
-      <%= f.input :geo_status, as: :boolean, label: "加入GPS定位" %>
     </div>
     <div class="col-xl-6">
       <h5 class="">飄移分鐘數</h5>
       <p>打卡時間為 0930，輸入 20，則會在 0930~0950 之間隨機打卡</p>
       <p>接受正負值，負值則是提前</p>
       <hr>
-    <%= f.input :start_work_padding_percentage, label: "上班打卡時間飄移分鐘數" %>
-    <%= f.input :end_work_padding_percentage, label: "下班打卡時間飄移分鐘數" %>
-    <%= f.input :geo_longitude, label: "緯度 (Longitude)" %>
+      <%= f.input :start_work_padding_percentage, label: "上班打卡時間飄移分鐘數" %>
+      <%= f.input :end_work_padding_percentage, label: "下班打卡時間飄移分鐘數" %>
     </div>
-    <div class="col-md-12">
-      <div id='map'></div>
+    <div class="col-xl-6">
+      <%= f.input :geo_latitude, label: "經度 (Latitude)" %>
     </div>
-    <div class="col-md-12">
+    <div class="col-xl-6">
+      <%= f.input :geo_longitude, label: "緯度 (Longitude)" %>
+    </div>
+    <div class="col-xl-6">
+      <div id='map' class="mb-4"></div>
+    </div>
+    <div class="col-xl-6">
       <div class="form-check form-switch pl-2">
-        <%= f.input :status, as: :boolean, checked_value: 'enable',unchecked_value: 'disable', label: "狀態" %>
+        <%= f.input :geo_status, as: :boolean, label: "加入GPS定位" %>
+        <%= f.input :status, as: :boolean, checked_value: 'enable',unchecked_value: 'disable', label: "服務狀態開關" %>
       </div>
+      <%= f.button :submit, "提交", class: "btn btn-success w-100" %>
     </div>
-    <%= f.button :submit, "提交", class: "btn btn-success" %>
   </div>
 <% end %>
