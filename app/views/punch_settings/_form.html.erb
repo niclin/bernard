@@ -14,7 +14,6 @@
       <%= f.input :start_work_time, label: "上班打卡時間" %>
       <%= f.input :end_work_time, label: "下班打卡時間" %>
       <%= f.input :geo_latitude, label: "經度 (Latitude)" %>
-      <%= f.input :geo_longitude, label: "緯度 (Longitude)" %>
       <%= f.input :geo_status, as: :boolean, label: "加入GPS定位" %>
     </div>
     <div class="col-xl-6">
@@ -24,7 +23,10 @@
       <hr>
     <%= f.input :start_work_padding_percentage, label: "上班打卡時間飄移分鐘數" %>
     <%= f.input :end_work_padding_percentage, label: "下班打卡時間飄移分鐘數" %>
-    <div id='map'></div>
+    <%= f.input :geo_longitude, label: "緯度 (Longitude)" %>
+    </div>
+    <div class="col-md-12">
+      <div id='map'></div>
     </div>
     <div class="col-md-12">
       <div class="form-check form-switch pl-2">

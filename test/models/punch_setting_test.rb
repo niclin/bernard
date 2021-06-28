@@ -13,6 +13,9 @@ end
 #  id                            :bigint           not null, primary key
 #  end_work_padding_percentage   :integer          default(0), not null
 #  end_work_time                 :string           not null
+#  geo_latitude                  :decimal(10, 6)   default(0.0), not null
+#  geo_longitude                 :decimal(10, 6)   default(0.0), not null
+#  geo_status                    :integer          default(0), not null
 #  id_serial                     :string           not null
 #  start_work_padding_percentage :integer          default(0), not null
 #  start_work_time               :string           not null
