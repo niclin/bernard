@@ -8,8 +8,8 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import "leaflet/dist/leaflet.css"
 import "leaflet"
-import 'leaflet/dist/leaflet.css';
 
 Rails.start()
 Turbolinks.start()
