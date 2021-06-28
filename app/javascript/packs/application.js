@@ -3,14 +3,13 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 import 'bootstrap/dist/js/bootstrap'
-import 'bootstrap/dist/css/bootstrap'
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
-import "leaflet"
+import Rails from '@rails/ujs'
+import Turbolinks from 'turbolinks'
+import * as ActiveStorage from '@rails/activestorage'
+import 'channels'
+import 'leaflet'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import './src/applications.scss'
 
 Rails.start()
 Turbolinks.start()
@@ -30,7 +29,6 @@ $(document).on('turbolinks:load', function () {
   // custome js in here ...
 
   $(document).on('click','.showPopup', function () {
-    // debugger;
     var iconSytle = $(this).data('icon') == 'successed' ? 'success' : 'error';
     Swal.fire({
       icon: iconSytle,
@@ -41,8 +39,8 @@ $(document).on('turbolinks:load', function () {
   if ($('#map').length > 0) {
     var map = L.map('map');
     var mkr = L.marker([0, 0]);
-    var lat = document.getElementById("punch_setting_geo_latitude").value == "0.0" ? "25.046273" : document.getElementById("punch_setting_geo_latitude").value
-    var lng = document.getElementById("punch_setting_geo_longitude").value == "0.0" ? "121.517498" : document.getElementById("punch_setting_geo_longitude").value
+    var lat = document.getElementById('punch_setting_geo_latitude').value == '0.0' ? '25.046273' : document.getElementById('punch_setting_geo_latitude').value
+    var lng = document.getElementById('punch_setting_geo_longitude').value == '0.0' ? '121.517498' : document.getElementById('punch_setting_geo_longitude').value
     mkr.bindPopup('0,0');
     mkr.addTo(map);
     L.tileLayer('https://www.google.com/maps/vt/pb=!1m4!1m3!1i{z}!2i{x}!3i{y}!2m3!1e0!2sm!3i345013117!3m8!2szh-TW!3scn!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0', {
@@ -84,7 +82,7 @@ $(document).on('turbolinks:load', function () {
     lt = Number(lt).toFixed(6);
     ln = Number(ln).toFixed(6);
     mkr.setPopupContent(lt + ',' + ln).openPopup();
-    document.getElementById("punch_setting_geo_latitude").value = lt;
-    document.getElementById("punch_setting_geo_longitude").value = ln;
+    document.getElementById('punch_setting_geo_latitude').value = lt;
+    document.getElementById('punch_setting_geo_longitude').value = ln;
   }
 });

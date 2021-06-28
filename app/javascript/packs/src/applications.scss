@@ -1,0 +1,9 @@
+/* theme_libs/style.css 就是以 bootstrap 5 為基礎 */
+// @import 'bootstrap/dist/css/bootstrap';
+
+/* 原本的 images/layers-2x.png 找不到，複製出來透過 theme_libs/ 底下 去找到該圖片 */
+// @import 'leaflet/dist/leaflet.css';
+
+@import 'sweetalert2/src/sweetalert2.scss';
+
+// below are custom css files or put in origin stylesheets/application.scss

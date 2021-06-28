@@ -11,12 +11,9 @@
     <%= javascript_include_tag  '/javascripts/apexcharts.min.js' %>
     <%= javascript_include_tag  '/javascripts/feather.min.js' %>
     <%= javascript_include_tag  '/javascripts/pcoded.min.js' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload' %>
-    <%#= Because bootstrap initial import by webpack %>
-    <%#= custome stylesheet need to load after js included to cover %>
-    <%#= or until application.scss which we can be deprecated to move into webpack %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <!-- [ Pre-loader ] start -->
