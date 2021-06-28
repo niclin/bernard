@@ -39,6 +39,6 @@ class PunchSettingsController < ApplicationController
   private
 
   def punch_setting_params
-    params.require(:punch_setting).permit(:uid, :id_serial, :start_work_time, :start_work_padding_percentage, :end_work_time, :end_work_padding_percentage, :status)
+    params.require(:punch_setting).permit(:uid, :id_serial, :start_work_time, :start_work_padding_percentage, :end_work_time, :end_work_padding_percentage, :status, :geo_latitude, :geo_longitude, :geo_status)
   end
 end
