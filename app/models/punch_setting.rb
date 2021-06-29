@@ -14,6 +14,7 @@ class PunchSetting < ApplicationRecord
   }
 
   def mask_id_serial
+    return "" if id_serial.blank?
     id_serial.dup.tap { |m| m[2..4] = "***" }
   end
 
