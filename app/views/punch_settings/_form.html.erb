@@ -1,10 +1,10 @@
 <%= simple_form_for @punch_setting, url: punch_setting_path do |f| %>
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :uid, label: "棉花糖 HR 登入系統帳號" %>
+      <%= f.input :uid, label: "棉花糖 HR 登入系統帳號", required: true %>
     </div>
     <div class="col-md-6">
-      <%= f.input :id_serial, label: "棉花糖 HR 登入系統密碼" %>
+      <%= f.input :id_serial, label: "棉花糖 HR 登入系統密碼", required: true %>
     </div>
     <div class="col-xl-6">
       <h5 class="">打卡時間</h5>
