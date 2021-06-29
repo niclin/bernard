@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_one :punch_setting
   has_many :punch_schedules
-  after_commit :send_welcome_notify, if: -> { new_record? }
+  after_create :send_welcome_notify
 
   def alreday_punch_today?(time_line: "AM")
     punch_schedules.where(
