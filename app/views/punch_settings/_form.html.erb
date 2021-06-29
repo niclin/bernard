@@ -33,7 +33,7 @@
     </div>
     <div class="col-xl-6">
       <div class="form-check form-switch pl-2">
-        <%= f.input :geo_status, as: :boolean, label: "加入GPS定位" %>
+        <%= f.input :geo_status, as: :boolean, checked_value: 'geo_enable',unchecked_value: 'geo_disable', label: "加入GPS定位" %>
         <%= f.input :status, as: :boolean, checked_value: 'enable',unchecked_value: 'disable', label: "服務狀態開關" %>
       </div>
       <%= f.button :submit, "提交", class: "btn btn-success w-100" %>

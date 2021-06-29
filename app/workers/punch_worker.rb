@@ -23,7 +23,7 @@ class PunchWorker
 
   def punch!(punch_schedule)
     punch_setting = punch_schedule.user.punch_setting
-    table_data = punch_setting.geo_status.present? ? '{}' : "{'latitude':#{punch_setting.geo_latitude},'longitude':#{punch_setting.geo_longitude}}"
+    table_data = punch_setting.geo_disable? ? '{}' : "{'latitude':#{punch_setting.geo_latitude},'longitude':#{punch_setting.geo_longitude}}"
 
     login = RestClient.post(
       HR_SYSTEM_URL,

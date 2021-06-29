@@ -8,6 +8,11 @@ class PunchSetting < ApplicationRecord
     enable: 1
   }
 
+  enum geo_status: {
+    geo_disable: 0,
+    geo_enable: 1
+  }
+
   def mask_id_serial
     id_serial.dup.tap { |m| m[2..4] = "***" }
   end
