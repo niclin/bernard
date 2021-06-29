@@ -32,6 +32,13 @@
       <div id='map' class="mb-4"></div>
     </div>
     <div class="col-xl-6">
+      <div class="form-group">
+        <label class="decimal optional" for="punch_setting_address">地址</label>
+        <div class="input-group">
+          <input id="address" type="text" class="form-control" placeholder="輸入地址取得經緯度">
+          <button class="btn btn-success" type="button" id="address_search">查詢</button>
+        </div>
+      </div>
       <div class="form-check form-switch pl-2">
         <%= f.input :geo_status, as: :boolean, checked_value: 'geo_enable',unchecked_value: 'geo_disable', label: "加入GPS定位" %>
         <%= f.input :status, as: :boolean, checked_value: 'enable',unchecked_value: 'disable', label: "服務狀態開關" %>

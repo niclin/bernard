@@ -36,6 +36,33 @@ $(document).on('turbolinks:load', function () {
     })
   })
 
+  $("#address_search").on('click', function () {
+    var address = document.getElementById("address").value;
+    $.ajax({
+      type: "GET",
+      url: "https://api.opencagedata.com/geocode/v1/json?q=" + encodeURIComponent(address) + "&key=a4f0f4439b464c449ceb589c44cb1e4a&no_annotations=1&language=zh-tw",
+      dataType: "json",
+      success: function (data) {
+        if (data.status.code == 200) {
+          if (data.total_results >= 1) {
+            var lat = data.results[0].geometry.lat;
+            var lng = data.results[0].geometry.lng;
+            document.getElementById("punch_setting_geo_latitude").value = lat;
+            document.getElementById("punch_setting_geo_longitude").value = lng;
+            sm(lat, lng, 18)
+          } else {
+            alert(trans.GeocodingError)
+          }
+        } else {
+          alert(trans.GeocodingError)
+        }
+      },
+      error: function (xhr, err) {
+        alert(trans.GeocodingError)
+      }
+    }).always(function () {})
+  })
+
   if ($('#map').length > 0) {
     var map = L.map('map');
     var mkr = L.marker([0, 0]);
