@@ -14,6 +14,20 @@
  *= require_self
  */
 
+
+
+/* Custom styles */
+.pc-mob-header, .pc-sidebar .m-header {
+  background: #000;
+}
+
+@media (max-width: 1024px) {
+  .pc-header .pcm-logo img {
+      max-width: 280px;
+  }
+}
+
+
 /* required map styles */
 #map {
   height: 500px;
