@@ -6,12 +6,29 @@ class User < ApplicationRecord
 
   has_one :punch_setting
   has_many :punch_schedules
+  after_commit :send_welcome_notify, if: -> { new_record? }
 
   def alreday_punch_today?(time_line: "AM")
     punch_schedules.where(
       date: Date.today,
       time_line: time_line,
     ).where.not(perform_at_unixtime: nil).exists?
+  end
+
+  private
+
+  def send_welcome_notify
+    text = ""
+    attachments = [{
+       "type": "mrkdwn",
+       "color": SLACK_COLOR.public_send("success"),
+       "text": "*狂暴的歡愉必將有著狂暴的結局*\n嗨 `#{self.email}` 歡迎來到西部世界!",
+       "footer": "WestWorld(1973)",
+       "ts": Time.zone.now.to_i
+    }]
+
+    slack_system_bot = SlackBot.new(channel: WEST_WORLD, username: "Bernard Bot")
+    slack_system_bot.say(text, attachments)
   end
 end
 
