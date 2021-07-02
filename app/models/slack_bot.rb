@@ -6,8 +6,8 @@ require "rest-client"
 class SlackBot
   class ResponseError < StandardError; end
 
-  def initialize(channel:, username: "slack_bot")
-    @channel = Rails.env.production? ? channel : BOMB_ZONE
+  def initialize(channel: WEST_WORLD, username: "slack_bot")
+    @channel = channel
     @username = username
   end
 

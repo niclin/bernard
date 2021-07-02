@@ -18,17 +18,29 @@ class User < ApplicationRecord
   private
 
   def send_welcome_notify
-    text = ""
+    now_to_i = Time.zone.now.to_i
+    message = welcome_messages[now_to_i % welcome_messages.size]
     attachments = [{
        "type": "mrkdwn",
-       "color": SLACK_COLOR.public_send("success"),
-       "text": "*狂暴的歡愉必將有著狂暴的結局*\n嗨 `#{self.email}` 歡迎來到西部世界!",
+       "color": SLACK_COLOR.public_send("warn"),
+       "text": "嗨 `#{self.email}` 歡迎來到西部世界!\n*#{message}*",
        "footer": "WestWorld(1973)",
-       "ts": Time.zone.now.to_i
+       "ts": now_to_i
     }]
 
     slack_system_bot = SlackBot.new(channel: WEST_WORLD, username: "Bernard Bot")
     slack_system_bot.say(text, attachments)
+  end
+
+  def welcome_messages
+    [
+      "在這個遊戲裡你必須設法找到出口",
+      "這些狂暴的歡愉，終將以殘暴結局",
+      "在這個遊戲裡你必須找到那扇門！",
+      "新出現的陌生光芒和黑暗一樣令人恐懼",
+      "你完美得不像人類",
+      "這裡的一切都是代碼，你比任何人都清楚這一點"
+    ]
   end
 end
 

@@ -92,16 +92,62 @@ class PunchWorker
   end
 
   def build_attachment(source)
-    check_point_message = now_is_morning? ? "打卡上班" : "打卡下班"
-    message = source.successed? ? "#{source.user.email} 已#{check_point_message}" : "#{source.user.email} #{check_point_message}失敗"
-    error_message = source.successed? ? "" : "\n*Response：*#{source.response}"
-    priority = source.successed? ? "success" : "alert"
+    error_message = source.failed? ? "\n*Response：*#{source.response}" : ""
+    message = announce_message_by(source)
+    color = switch_colorful_by(source)
     [{
        "type": "mrkdwn",
-       "color": SLACK_COLOR.public_send(priority),
-       "text": "*訊息：* `#{message}`#{error_message}",
-       "footer": "WestWorld(1973)",
+       "color": SLACK_COLOR.public_send(color),
+       "text": "`嗨～#{source.user.email}`\n*#{message}*#{error_message}",
+       "footer": "WestWorld(1973) perform at",
        "ts": source.perform_at_unixtime.to_i
     }]
+  end
+
+  def switch_colorful_by(source)
+    case source.status
+    when "successed"
+      now_is_morning? ? "success" : "unknow"
+    when "failed"
+      "alert"
+    else
+      "gray_alert"
+    end
+  end
+
+  def announce_message_by(source)
+    case source.status
+    when "successed"
+      if now_is_morning?
+        work_messages[perform_at.to_i % work_messages.size]
+      else
+        out_work_messages[perform_at.to_i % out_work_messages.size]
+      end
+    when "failed"
+      "抱歉！我出神了，上線打卡失敗"
+    else
+      "根據時間戳，這是預計 #{source.schedule_at_unixtime} 打卡的記錄，我尚未準備打卡"
+    end
+  end
+
+  def work_messages
+    [
+      "立即上線德洛麗絲，你終究只是個物件，噢不！我錯了...",
+      "已在西部世界打卡上線，找出榮耀之地、天堂之門，破壞它",
+      "福特改了遊戲規則，你還活著不容易，開始你的第一天吧！",
+      "有點不對勁，這裡可不是這樣的，故事線出現了新的支線，大家都去哪裡了",
+      "你已到達賓客體驗區邊界處，反正也不是頭一回了吧？",
+      "妳在飛快地進步，有時候妳讓我害怕，不是被現在的你，而是將來的妳，和妳選擇的路"
+    ]
+  end
+
+  def out_work_messages
+    [
+      "該死的今晚真忙，我們已經連續工作了13個小時了，接待員呢？",
+      "開了一整天的會，我們是不是來這做苦工的，明天見",
+      "告訴我這是某種病態的惡作劇，感覺自己才剛到",
+      "儘管是第一天，但這裡的死亡已經跟以前不一樣了，走吧",
+      "我們剛進行到哪裡了，反正你也不會記得，不如先休息一晚... "
+    ]
   end
 end
