@@ -28,7 +28,7 @@ class User < ApplicationRecord
        "ts": now_to_i
     }]
 
-    slack_system_bot = SlackBot.new(channel: WEST_WORLD, username: "Bernard Bot")
+    slack_system_bot = SlackBot.new(channel: WEST_WORLD, username: "Bernard Lowe")
     slack_system_bot.say(text, attachments)
   end
 
