@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_one :punch_setting
   has_many :punch_schedules
-  after_create :send_welcome_notify
+  after_create :send_welcome_notify, if: -> { Rails.env.production? }
 
   def alreday_punch_today?(time_line: "AM")
     punch_schedules.where(

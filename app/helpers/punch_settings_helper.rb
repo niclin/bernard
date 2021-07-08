@@ -11,6 +11,8 @@ module PunchSettingsHelper
               "badge bg-success"
             when "failed"
               "badge bg-danger"
+            when "cancel"
+              "badge bg-warning"
             else
               "badge bg-secondary"
             end
