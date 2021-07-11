@@ -6,9 +6,6 @@ class PunchWorker
   sidekiq_options retry: false
   sidekiq_options unique: :until_and_while_executing
 
-  HR_SYSTEM_URL = "https://chr.ecmaker.com/servlet/jform".freeze
-  FORM_FILE = "hrm8airw.pkg;hrm_1749486007995236467020778061283968299909.cfg,hrm8w.pkg,briefcase.pkg,hrm8aw.pkg,hrm8bw.pkg,hrm8fw.pkg".freeze
-
   def perform
     PunchSchedule.pending.where(schedule_at_unixtime: (Time.zone.now - 1.minutes).to_i..(Time.zone.now + 1.minutes).to_i, time_line: time_line).find_each do |punch_schedule|
       if in_safe_time_range?(punch_schedule) && !punch_schedule.user.alreday_punch_today?(time_line: time_line)
@@ -26,25 +23,25 @@ class PunchWorker
     table_data = punch_setting.geo_disable? ? '{}' : "{'latitude':#{punch_setting.geo_latitude},'longitude':#{punch_setting.geo_longitude}}"
 
     login = RestClient.post(
-      HR_SYSTEM_URL,
+      ENV["HR_SYSTEM_URL"],
       {
         "uid": punch_setting.uid,
         "pwd": punch_setting.id_serial.upcase,
         "locale": "TW",
         "button": "提交",
-        "file": FORM_FILE
+        "file": ENV["FORM_FILE"]
       })
 
     cookies_object = login.cookies
 
     punch_response = RestClient.post(
-      HR_SYSTEM_URL,
+      ENV["HR_SYSTEM_URL"],
       {
         em_step: "ajax",
         buttonid: "hrCottonCandyApp.workcardAir.addWorkCard",
         buttonlink: "ajax_call",
         table_data: table_data,
-        file: FORM_FILE,
+        file: ENV["FORM_FILE"],
       },
       {
         cookies: cookies_object
