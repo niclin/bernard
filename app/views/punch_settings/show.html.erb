@@ -61,7 +61,10 @@
               <th scope="row"><%= punch_schedule.date.to_s(:ymd) %></th>
               <th scope="row"><%= Time.zone.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
               <th scope="row"><%= render_perform_at_time_string(punch_schedule.perform_at_unixtime) %></th>
-              <th scope="row"><%= render_status(punch_schedule) %></th>
+              <th scope="row">
+                <%= render_status(punch_schedule) %>
+                <%= link_to '臨時請假?',  cancel_punch_schedule_path(id: punch_schedule.id), method: "post", class: "ml-2", data: { confirm: "確定取消預約嗎？"} if punch_schedule.pending? %>
+              </th>
               <th scope="row"><%= punch_schedule.created_at %></th>
               <th scope="row">
                 <% if !punch_schedule.pending? %>

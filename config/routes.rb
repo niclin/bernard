@@ -4,6 +4,12 @@ Rails.application.routes.draw do
 
   resource :punch_setting
 
+  resources :punch_schedules do
+    member do
+      post :cancel
+    end
+  end
+
   # Sidekiq Admin Web UI
   require "sidekiq/web"
   require "sidekiq/cron/web"

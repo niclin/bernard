@@ -8,7 +8,8 @@ class PunchSchedule < ApplicationRecord
   enum status: {
     pending: 0,
     successed: 1,
-    failed: 2
+    failed: 2,
+    cancel: 3
   }
 end
 

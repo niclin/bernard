@@ -9,3 +9,4 @@ zh-TW:
         pending: "待處理"
         successed: "成功"
         failed: "失敗"
+        cancel: "取消"
