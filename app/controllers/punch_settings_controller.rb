@@ -36,14 +36,6 @@ class PunchSettingsController < ApplicationController
     @punch_schedules = current_user.punch_schedules.order(id: :desc)
   end
 
-  def cancel_schedule
-    punch_schedule = PunchSchedule.find(params[:id])
-    punch_schedule.cancel!
-    redirect_to punch_setting_path
-  rescue StrandardError => e
-    redirect_to punch_setting_path
-  end
-
   private
 
   def punch_setting_params
