@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resource :punch_setting
 
-  resource :punch_schedule, only: :destroy
+  resources :punch_schedules do
+    member do
+      post :cancel
+    end
+  end
 
   # Sidekiq Admin Web UI
   require "sidekiq/web"

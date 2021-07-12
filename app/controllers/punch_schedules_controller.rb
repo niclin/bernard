@@ -1,5 +1,5 @@
 class PunchSchedulesController < ApplicationController
-  def destroy
+  def cancel
     punch_schedule = PunchSchedule.find(params[:id])
     punch_schedule.cancel!
     redirect_to punch_setting_path
