@@ -73,6 +73,7 @@
               </th>
             </tr>
           <% end %>
+          <%= will_paginate @punch_schedules, list_classes: %w(pagination justify-content-center) %>
         </tbody>
       </table>
     <% end %>

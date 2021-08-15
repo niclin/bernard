@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem "devise"
 gem "simple_form"
+gem "will_paginate"
 
 # Background jobs
 gem "sidekiq"

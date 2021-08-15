@@ -33,7 +33,7 @@ class PunchSettingsController < ApplicationController
 
   def show
     @punch_setting = current_user.punch_setting
-    @punch_schedules = current_user.punch_schedules.order(id: :desc)
+    @punch_schedules = current_user.punch_schedules.order(id: :desc).paginate(page: params[:page], per_page: 12)
   end
 
   private
