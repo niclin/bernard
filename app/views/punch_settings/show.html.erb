@@ -106,7 +106,7 @@
   </div>
   <div class="card-body">
     <strong><small>系統將於每天 00:30 建立打卡預約單</small></strong>
-    <% if @punch_schedules.present? %>
+    <% if @punch_schedules_list.present? %>
       <table class="table">
         <thead>
           <tr>
@@ -120,7 +120,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @punch_schedules.each do |punch_schedule| %>
+          <% @punch_schedules_list.each do |punch_schedule| %>
             <tr>
               <th scope="row"><%= render_timeline_badge(punch_schedule.time_line) %></th>
               <th scope="row"><%= punch_schedule.date.to_s(:ymd) %></th>
@@ -140,7 +140,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= will_paginate @punch_schedules, class: "pagination justify-content-center", next_label: "Next", previous_label: "Previous", renderer: CustomPaginateRenderer %>
+      <%= will_paginate @punch_schedules_list, class: "pagination justify-content-center", next_label: "Next", previous_label: "Previous", renderer: CustomPaginateRenderer %>
     <% end %>
   </div>
 </div>
