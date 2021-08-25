@@ -1,40 +1,105 @@
-<div class="card">
-  <div class="card-header">
-    <h2>我的打卡設定</h2>
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h2>我的打卡設定</h2>
+      </div>
+      <div class="card-body">
+        <% if @punch_setting.blank? %>
+          <%= link_to("New", new_punch_setting_path) %>
+        <% else %>
+          <%= render partial: "my_settings", locals: { punch_setting: @punch_setting } %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="card-body">
-    <% if @punch_setting.blank? %>
-      <%= link_to("New", new_punch_setting_path) %>
-    <% else %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">UID</th>
-            <th scope="col">ID Serial</th>
-            <th scope="col">開始工作時間</th>
-            <th scope="col">開始工作飄移分鐘數</th>
-            <th scope="col">結束工作時間</th>
-            <th scope="col">結束飄移分鐘數</th>
-            <th scope="col">狀態</th>
-            <th scope="col">#</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><%= @punch_setting.uid %></th>
-            <th scope="row"><%= @punch_setting.mask_id_serial %></th>
-            <th scope="row"><%= @punch_setting.start_work_time %></th>
-            <th scope="row"><%= @punch_setting.start_work_padding_percentage %></th>
-            <th scope="row"><%= @punch_setting.end_work_time %></th>
-            <th scope="row"><%= @punch_setting.end_work_padding_percentage %></th>
-            <th scope="row"><%= t("enum.punch_setting.status.#{@punch_setting.status}") %></th>
-            <th scope="row"><%= link_to("Edit", edit_punch_setting_path, class: "btn btn-sm btn-primary") %></th>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
+  <div class="col-md-6">
+    <div class="card support-bar overflow-hidden">
+      <div class="card-body pb-0">
+        <h2 class="m-0"><%= @punch_schedules.AM.this_month.successed.size * 100  / this_month_days %>%</h2>
+        <span class="text-primary"><%= Time.current.month %>月上班成功打卡率</span>
+        <p class="text-primary"><%= Time.current.month %>月上班成功打卡次數(<%= @punch_schedules.AM.this_month.successed.size %>)</p>
+        <!-- <p class="mb-3 mt-3">Number of conversions divided by the total visitors. </p> -->
+      </div>
+      <div id="support-chart"></div>
+      <div class="card-footer border-0 bg-primary text-white background-pattern-white">
+        <div class="row text-center">
+          <%# 此處調用 month_at(month) 疑似 n+1 %>
+          <% 4.times do |time| %>
+            <% month = Time.current.month + (time - 3) %>
+            <div class="col">
+              <h4 class="m-0 text-white"><%= @punch_schedules.month_at(month).size %> 次</h4>
+              <span><%= month %> 月</span>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card prod-p-card background-pattern">
+            <div class="card-body">
+                <div class="row align-items-center m-b-0">
+                    <div class="col">
+                      <h6 class="m-b-5">平均上班於</h6>
+                      <h3 class="m-b-0"><%= render_time_average(@punch_schedules.successed.AM) %></h3>
+                    </div>
+                    <div class="col-auto">
+                      <i class="material-icons-two-tone text-primary">alarm</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card prod-p-card bg-primary background-pattern-white">
+            <div class="card-body">
+                <div class="row align-items-center m-b-0">
+                    <div class="col">
+                      <h6 class="m-b-5 text-white">平均下班於</h6>
+                      <h3 class="m-b-0 text-white"><%= render_time_average(@punch_schedules.successed.PM) %></h3>
+                    </div>
+                    <div class="col-auto">
+                      <i class="material-icons-two-tone text-white">alarm_off</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card prod-p-card bg-primary background-pattern-white">
+            <div class="card-body">
+                <div class="row align-items-center m-b-0">
+                    <div class="col">
+                      <h6 class="m-b-5 text-white">至今成功打卡次數(上/下班)</h6>
+                      <h3 class="m-b-0 text-white"><%= @punch_schedules.successed.size %> 次</h3>
+                    </div>
+                    <div class="col-auto">
+                      <i class="material-icons-two-tone text-white">room</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card prod-p-card background-pattern">
+            <div class="card-body">
+                <div class="row align-items-center m-b-0">
+                    <div class="col">
+                      <h6 class="m-b-5">至今取消打卡次數(上/下班)</h6>
+                      <h3 class="m-b-0"><%= @punch_schedules.cancel.size %> 次</h3>
+                    </div>
+                    <div class="col-auto">
+                      <i class="material-icons-two-tone text-primary">exit_to_app</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="card">
   <div class="card-header">
     <h2>自動打卡記錄<h2>
@@ -62,7 +127,7 @@
               <th scope="row"><%= Time.zone.at(punch_schedule.schedule_at_unixtime).to_s(:just_time) %></th>
               <th scope="row"><%= render_perform_at_time_string(punch_schedule.perform_at_unixtime) %></th>
               <th scope="row">
-                <%= render_status(punch_schedule) %>
+                <%= render_status_tag(punch_schedule) %>
                 <%= link_to '臨時請假?',  cancel_punch_schedule_path(id: punch_schedule.id), method: "post", class: "ml-2", data: { confirm: "確定取消預約嗎？"} if punch_schedule.pending? %>
               </th>
               <th scope="row"><%= punch_schedule.created_at %></th>
@@ -79,3 +144,51 @@
     <% end %>
   </div>
 </div>
+
+<% content_for :js_load do %>
+  <script>
+    $(function() {
+      var options1 = {
+        chart: {
+          type: 'area',
+          height: 85,
+          sparkline: {
+              enabled: true
+          }
+        },
+        colors: ["#7267EF"],
+        stroke: {
+          curve: 'smooth',
+          width: 2,
+        },
+        series: [{
+          name: "上班於",
+          data: <%= render_compression_time_array(@punch_schedules.AM) %>
+        }],
+        tooltip: {
+          fixed: {
+              enabled: false
+          },
+          x: {
+              show: false
+          },
+          y: {
+            formatter: function(seriesName) {
+              var string = String(seriesName).padStart(4, 0);// var a = '7'; a.padStart(2, 0); ==> '07'
+              var hoursString = string.slice(0, 2);
+              var secString = string.substr(2, 2);
+
+              return hoursString + ":" + secString
+            }
+          },
+          marker: {
+              show: false
+          }
+        }
+      }
+      if($("#support-chart").length > 0) {
+          new ApexCharts(document.querySelector("#support-chart"), options1).render();
+      }
+    });
+  </script>
+<% end %>

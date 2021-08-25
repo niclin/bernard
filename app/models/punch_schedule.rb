@@ -11,6 +11,9 @@ class PunchSchedule < ApplicationRecord
     failed: 2,
     cancel: 3
   }
+
+  scope :this_month, -> { where("perform_at_unixtime > ? AND perform_at_unixtime <= ?", Time.current.beginning_of_month.to_i, Time.current.end_of_month.to_i) }
+  scope :month_at, ->(month) { where("perform_at_unixtime > ? AND perform_at_unixtime <= ?", Time.new(Time.current.year, month).beginning_of_month.to_i, Time.new(Time.current.year, month).end_of_month.to_i) }
 end
 
 # == Schema Information

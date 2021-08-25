@@ -4,6 +4,8 @@ zh-TW:
       status:
         disable: "關閉"
         enable: "啟用"
+        geo_disable: "關閉"
+        geo_enable: "啟用"
     punch_schedule:
       status:
         pending: "待處理"
