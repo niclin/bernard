@@ -163,7 +163,7 @@
         },
         series: [{
           name: "上班於",
-          data: <%= render_compression_time_array(@punch_schedules.AM) %>
+          data: <%= render_compression_time_array(@punch_schedules.AM.successed) %>
         }],
         tooltip: {
           fixed: {

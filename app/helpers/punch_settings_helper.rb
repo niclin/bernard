@@ -33,7 +33,8 @@ module PunchSettingsHelper
   # 壓縮時間，方便畫線(2021/09/12 -> 912)
   def render_compression_time_array(punch_schedules)
     time_array = punch_schedules.pluck(:perform_at_unixtime)
-    min_time_array = time_array.sort.map do |time|
+    min_time_array = time_array.map do |time|
+      return 0 if time.blank?
       (Time.zone.at(time).strftime("%H") + Time.zone.at(time).strftime("%M")).to_i
     end
 
