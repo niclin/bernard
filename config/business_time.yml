@@ -1,0 +1,15 @@
+business_time:
+  beginning_of_workday: 9:30 am
+  end_of_workday: 6:00 pm
+  holidays:
+    - Jan 01, 2010
+    - July 4th, 2010
+    - September 21th, 2021
+    - October 11th, 2021
+    - December 31th, 2021
+  work_week:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
