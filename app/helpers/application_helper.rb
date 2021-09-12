@@ -20,7 +20,7 @@ module ApplicationHelper
   def this_month_business_days(month_number)
     first_month = Date::MONTHNAMES[month_number.to_i]
     next_month = Date::MONTHNAMES[month_number.to_i + 1]
-    first_date = Date.parse(month_name)
+    first_date = Date.parse(first_month)
     next_date = Date.parse(next_month)
     first_date.business_days_until(next_date)
   end
