@@ -17,7 +17,7 @@
   <div class="col-md-6">
     <div class="card support-bar overflow-hidden">
       <div class="card-body pb-0">
-        <h2 class="m-0"><%= render_this_month_daka_percentage(@punch_schedules.AM.successed.this_month)  %>%</h2>
+        <h2 class="m-0"><%= render_this_month_daka_percentage(@punch_schedules.AM.successed.this_month, Time.current.month)  %>%</h2>
         <span class="text-primary"><%= Time.current.month %>月上班成功打卡率</span>
         <p class="text-primary"><%= Time.current.month %>月上班成功打卡次數(<%= @punch_schedules.AM.successed.this_month.size %>)</p>
         <!-- <p class="mb-3 mt-3">Number of conversions divided by the total visitors. </p> -->
@@ -31,7 +31,7 @@
             <div class="col">
               <h4 class="m-0 text-white">
                 <%= @punch_schedules.AM.successed.month_at(month).size %> 次
-                (<%= render_this_month_daka_percentage(@punch_schedules.AM.successed.month_at(month)) %>％)
+                (<%= render_this_month_daka_percentage(@punch_schedules.AM.successed.month_at(month), month) %>％)
               </h4>
               <span><%= month %> 月</span>
             </div>

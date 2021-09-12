@@ -67,7 +67,7 @@ module PunchSettingsHelper
     array.to_s.html_safe
   end
 
-  def render_this_month_daka_percentage(punch_schedules)
-    punch_schedules.size * 100  / this_month_business_days
+  def render_this_month_daka_percentage(punch_schedules, month)
+    punch_schedules.size * 100  / this_month_business_days(month)
   end
 end

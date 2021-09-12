@@ -17,7 +17,7 @@ module ApplicationHelper
   # 這個月有幾天工作日
   # gem business_time
   # 新增特殊假日於 config/business_time.yml
-  def this_month_business_days
+  def this_month_business_days(month)
     this_month_first_day = Time.current.beginning_of_month.to_date
     next_month_first_day = Time.current.next_month.beginning_of_month.to_date
     this_month_first_day.business_days_until(next_month_first_day)
