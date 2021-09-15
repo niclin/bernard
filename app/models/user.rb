@@ -29,7 +29,7 @@ class User < ApplicationRecord
     }]
 
     slack_system_bot = SlackBot.new(channel: WEST_WORLD, username: "Bernard Lowe")
-    slack_system_bot.say(text, attachments)
+    slack_system_bot.say(nil, attachments)
   end
 
   def welcome_messages
