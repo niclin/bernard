@@ -43,6 +43,7 @@ module PunchSettingsHelper
 
   # 平均上下班於
   def render_time_average(punch_schedules)
+    return "00:00" if punch_schedules.blank?
     time_array = punch_schedules.pluck(:perform_at_unixtime)
     hour_array = time_array.map do |time|
       Time.zone.at(time).strftime("%H").to_i
