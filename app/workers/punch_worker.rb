@@ -34,6 +34,20 @@ class PunchWorker
 
     cookies_object = login.cookies
 
+    gps_punch_response = RestClient.post(
+      ENV["HR_SYSTEM_URL"],
+      {
+        em_step: "ajax",
+        buttonid: "hrCottonCandyApp.workcardAir.getGPSAndPunch",
+        buttonlink: "ajax_call",
+        table_data: "{}",
+        file: ENV["FORM_FILE"],
+      },
+      {
+        cookies: cookies_object
+      }
+    )
+
     punch_response = RestClient.post(
       ENV["HR_SYSTEM_URL"],
       {
