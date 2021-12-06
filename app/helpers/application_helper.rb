@@ -1,4 +1,6 @@
 module ApplicationHelper
+  FIRST_MONTH = 1
+
   def render_perform_at_time_string(unixtime)
     return if unixtime.blank?
 
@@ -18,10 +20,17 @@ module ApplicationHelper
   # gem business_time
   # 新增特殊假日於 config/business_time.yml
   def this_month_business_days(month_number)
-    first_month = Date::MONTHNAMES[month_number.to_i]
-    next_month = Date::MONTHNAMES[month_number.to_i + 1]
-    first_date = Date.parse(first_month)
-    next_date = Date.parse(next_month)
+    first_month_name = Date::MONTHNAMES[month_number.to_i]
+    next_month_name = Date::MONTHNAMES[last_month?(month_number) ? FIRST_MONTH : (month_number.to_i + 1)]
+
+    first_date = Date.parse(first_month_name)
+    next_date = Date.parse(last_month?(month_number) ? "#{next_month_name} #{Time.current.year + 1}" : next_month_name.to_s )
     first_date.business_days_until(next_date)
+  end
+
+  private
+
+  def last_month?(number)
+    number.to_i == 12
   end
 end
