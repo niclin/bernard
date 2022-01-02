@@ -57,7 +57,7 @@ body {
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
-    line-height: 1.5;
+    /* line-height: 1.5; */
     color: #293240;
     background-color: #f0f2f8;
     -webkit-text-size-adjust: 100%;
@@ -84,7 +84,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.25em;
     color: #060606;
 }
 
@@ -606,7 +606,6 @@ progress {
     color: #6c757d;
 }
 
-.container,
 .container-fluid,
 .container-sm,
 .container-md,
@@ -622,31 +621,31 @@ progress {
 }
 
 @media (min-width: 576px) {
-    .container, .container-sm {
+    .container-sm {
         max-width: 540px;
     }
 }
 
 @media (min-width: 768px) {
-    .container, .container-sm, .container-md {
+    .container-sm, .container-md {
         max-width: 720px;
     }
 }
 
 @media (min-width: 992px) {
-    .container, .container-sm, .container-md, .container-lg {
+    .container-sm, .container-md, .container-lg {
         max-width: 960px;
     }
 }
 
 @media (min-width: 1200px) {
-    .container, .container-sm, .container-md, .container-lg, .container-xl {
+    .container-sm, .container-md, .container-lg, .container-xl {
         max-width: 1140px;
     }
 }
 
 @media (min-width: 1400px) {
-    .container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+    .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
         max-width: 1320px;
     }
 }
@@ -4186,16 +4185,6 @@ textarea.form-control-lg {
     display: block;
 }
 
-.navbar {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
-
 .navbar > .container,
   .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
     display: flex;
@@ -4339,6 +4328,7 @@ textarea.form-control-lg {
     .navbar-expand-lg {
         flex-wrap: nowrap;
         justify-content: flex-start;
+        display: flex;
     }
 
     .navbar-expand-lg .navbar-nav {
@@ -14560,12 +14550,6 @@ svg.feather:not([class*='wid-']) {
 
 svg.feather:not([class*='hei-']) {
     height: 20px;
-}
-
-@media (min-width: 1600px) {
-    .container {
-        max-width: 1540px;
-    }
 }
 
 pre[class*="language-"]:before, pre[class*="language-"]:after {

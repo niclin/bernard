@@ -1,95 +1,163 @@
+<!-- Preloader -->
+<div id="preloader"></div>
+<!-- Progress scroll totop -->
+<div class="progress-wrap cursor-pointer">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+</div>
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-    <div class="container px-5">
-        <a class="navbar-brand" href="#page-top">Bernard</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto">
-              <% if user_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to("我的後台", punch_setting_path, class: "nav-link") %>
-                </li>
-              <% else %>
-                <li class="nav-item">
-                  <%= link_to("註冊", new_registration_path(User), class: "nav-link") %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to("登入", new_user_session_path, class: "nav-link") %>
-                </li>
-              <% end %>
-            </ul>
+<nav class="navbar-head navbar-expand-lg">
+    <!-- Logo -->
+    <div class="logo-wrapper valign">
+        <div class="logo">
+            <a href="index.html"> 
+                <%= image_tag("logo.png", class: "logo-img") %>
+                <h2>BERNARD<span>WEST WORLD</span></h2>
+            </a>
         </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="icon-bar"><i class="fas fa-grip-lines"></i></span> </button>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+                <%= link_to("我的後台", punch_setting_path, class: "nav-link") %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+                <%= link_to("註冊", new_registration_path(User), class: "nav-link") %>
+            </li>
+            <li class="nav-item">
+                <%= link_to("登入", new_user_session_path, class: "nav-link") %>
+            </li>
+            <% end %>
+        </ul>
     </div>
 </nav>
-<!-- Header-->
-<header class="masthead text-center text-white">
-    <div class="masthead-content">
-        <div class="container px-5">
-            <h1 class="text-white masthead-heading mb-0">讓你更專注於工作</h1>
-            <h2 class="text-white masthead-subheading mb-0">這是你最後一次忘記打卡</h2>
-            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">知道更多</a>
+<!-- Slider -->
+<header id="home" class="header slider-fade" data-scroll-index="0">
+    <div class="text-right item bg-img" data-overlay-dark="0" data-background="<%= image_path("banner.jpg") %>">
+        <div class="v-middle caption mt-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 offset-md-5">
+                            <h1>讓你更專注於工作</h1>
+                            <p>這是你最後一次忘記打卡</p>
+                            <div class="butn-light mt-30 mb-30"><a href="#" data-scroll-nav="1"><span>了解更多</span></a></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="bg-circle-1 bg-circle"></div>
-    <div class="bg-circle-2 bg-circle"></div>
-    <div class="bg-circle-3 bg-circle"></div>
-    <div class="bg-circle-4 bg-circle"></div>
+    <!-- Left Panel -->
+    <div class="left-panel">
+        <ul class="social-left clearfix">
+            <li><a href="#about" data-scroll-nav="1"><i class="fas fa-info"></i></a></li>
+            <li><a href="#快速上手" data-scroll-nav="2"><i class="fas fa-bolt"></i></a></li>
+            <li><a href="#為什麼選擇bernard" data-scroll-nav="3"><i class="fas fa-question"></i></a></li>
+        </ul>
+    </div>
 </header>
-<!-- Content section 1-->
-<section id="scroll">
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5">
-                  <%= image_tag("check.png", class: "img-fluid rounded-circle") %>
+<!-- Content -->
+<div class="content-wrapper">
+    <!-- Lines -->
+    <section class="content-lines-wrapper">
+        <div class="content-lines-inner">
+            <div class="content-lines"></div>
+        </div>
+    </section>
+    <!-- About -->
+    <section id="about" class="about section-padding" data-scroll-index="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-30 animate-box" data-animate-effect="fadeInUp">
+                    <h2 class="section-title">About <span>Bernard</span></h2>
+                    <p>打卡制度是為了困住奴工</p>
+                    <p>Bernard 可以幫助你解決不必要的流程</p>
+                    <p>設定好的參數從未讓人失望，讓你可以更專注於工作之上！</p>
+                    <p>現在已經成功打卡了 <%= PunchSchedule.successed.count %> 次</p>
                 </div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">幹！又忘記打卡</h2>
-                    <p>專注於工作的人，忘記打卡是正常的吧！</p>
+                <div class="col-md-6 animate-box" data-animate-effect="fadeInUp">
+                    <div class="about-img">
+                        <div class="img"><%= image_tag("about.jpg", class: "img-fluid") %></div>
+                        <div class="about-img-2 about-buro">Bernard Lowe</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Content section 2-->
-<section>
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6">
-                <div class="p-5">
-                  <%= image_tag("bernard.png", class: "img-fluid rounded-circle") %>
+    </section>
+    <!-- Services -->
+    <section id="services" class="services section-padding" data-scroll-index="2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="section-title">簡單 <span>三步殺</span></h2>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="p-5">
-                    <h2 class="display-4">Bernard 將成為你的得力助手</h2>
-                    <p>打卡制度是為了困住奴工，bernad 可以幫助你解決不必要的流程，設定好參數從未讓人失望，讓你可以更專注於工作之上！現在已經成功打卡了 <%= PunchSchedule.successed.count %>次</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="item">
+                        <h5>註冊帳號</h5>
+                        <div class="line"></div>
+                        <p>只需輸入帳密即可完成註冊</p>
+                        <div class="numb">01</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <h5>確認參數</h5>
+                        <div class="line"></div>
+                        <p>設定好各項參數，啟用服務</p>
+                        <div class="numb">02</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item">
+                        <h5>開始享受</h5>
+                        <div class="line"></div>
+                        <p>你將更專注於工作之上</p>
+                        <div class="numb">03</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Content section 3-->
-<section>
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-            <div class="col-lg-6 order-lg-2">
-                <div class="p-5">
-                  <%= image_tag("hand_phone.png", class: "img-fluid rounded-circle") %>
-                </div>
-            </div>
-            <div class="col-lg-6 order-lg-1">
-                <div class="p-5">
-                    <h2 class="display-4">萬無一失的預約</h2>
-                    <p>自動跳開國定假日，不會讓你在假日也打卡，支援每年度台灣政府公佈之國定假日匯入。</p>
+    </section>
+    <!-- Testiominals -->
+    <section class="testimonials" data-scroll-index="3">
+        <div class="background bg-img bg-fixed section-padding pb-0" data-background="<%= image_path("f_banner.jpg") %>" data-overlay-dark="3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 offset-md-7">
+                        <div class="testimonials-box animate-box" data-animate-effect="fadeInUp">
+                            <div class="head-box">
+                                <h4>為什麼選擇Bernard?</h4>
+                            </div>
+                            <div class="item">
+                                <span class="quote"><%= image_tag("quot.png") %></span>
+                                <p>Bernard 不但能自動打卡</p>
+                                <p>還能自動跳開國定假日，不會讓你在假日也打卡</p>
+                                <p>且支援每年度台灣政府公佈之國定假日匯入</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!-- Footer-->
-<footer class="py-5 bg-black">
-    <div class="container px-5"><p class="m-0 text-center text-black small">Copyright &copy; Bernard 2021</p></div>
-</footer>
+    </section>
+    <!-- Footer -->
+    <footer class="main-footer dark">
+        <div class="sub-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-right">
+                            <p>© 2021 Bernard. All right reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
