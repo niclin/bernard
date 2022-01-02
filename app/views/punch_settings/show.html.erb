@@ -27,7 +27,7 @@
         <div class="row text-center">
           <%# 此處調用 month_at(month) 疑似 n+1 %>
           <% 4.times do |time| %>
-            <% month = Time.current.month + (time - 3) %>
+            <% month = Time.current.month + (time - 3) > 0 ? Time.current.month + (time - 3) : next %>
             <div class="col">
               <h4 class="m-0 text-white">
                 <%= @punch_schedules.AM.successed.month_at(month).size %> 次
