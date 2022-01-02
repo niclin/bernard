@@ -18,14 +18,11 @@ $(function() {
     // Navbar scrolling background
     wind.on("scroll",function () {
         var bodyScroll = wind.scrollTop(),
-            navbar = $(".navbar-head"),
-            logo = $(".navbar-head .logo> img");
+            navbar = $(".navbar-head");
         if(bodyScroll > 100){
             navbar.addClass("nav-scroll");
-            logo.attr('src', 'img/logo.png');
         }else{
             navbar.removeClass("nav-scroll");
-            logo.attr('src', 'img/logo.png');
         }
     });
     
