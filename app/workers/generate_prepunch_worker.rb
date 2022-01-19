@@ -8,7 +8,7 @@ class GeneratePrepunchWorker
     PunchSetting.enable.find_each do |punch_setting|
       today = Time.zone.today
 
-      next if Holiday.at?(today)
+      next if Holiday.at?(today) || !Date.parse(today.to_s).workday?
 
       user = punch_setting.user
 

@@ -2,11 +2,20 @@ business_time:
   beginning_of_workday: 9:30 am
   end_of_workday: 6:00 pm
   holidays:
-    - Jan 01, 2010
-    - July 4th, 2010
     - September 21th, 2021
     - October 11th, 2021
-    - December 31th, 2021
+    - Jan 31, 2022
+    - Feb 01, 2022
+    - Feb 02, 2022
+    - Feb 03, 2022
+    - Feb 04, 2022
+    - Feb 28, 2022
+    - April 4, 2022
+    - April 5, 2022
+    - May 2, 2022
+    - Jun 3, 2022
+    - Oct 10, 2022
+    - Jan 01, 2023
   work_week:
     - mon
     - tue
